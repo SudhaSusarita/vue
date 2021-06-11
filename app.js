@@ -47,3 +47,55 @@ console.log(coordinates);       // create a HTML element for each feature
   
    
     });
+
+    function filter(){
+      let species = document.getElementsByName("Species").value;
+      let range = document.getElementsByName("range").value;
+      let month = document.getElementsByName("month").value;
+      var formData = new FormData();
+      formData.append("species", species);
+      formData.append("dateRange", range);
+      formData.append("month", 0);
+       
+      var geojson;
+      let request = new XMLHttpRequest();
+      request.open("GET","http://192.168.32.1:5005/api/sightings");
+      
+      request.send(formData);
+      request.onload =() => {
+        console.log(request);
+        if(request.status ===200){
+          geojson =JSON.parse(request.response);
+          geojson.forEach(function (marker) {
+  
+  let coordinates = [marker.longitude,marker.latitude];
+  console.log(coordinates);       // create a HTML element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker';
+             
+            // make a marker for each feature and add it to the map
+            new mapboxgl.Marker(el)
+            .setLngLat(coordinates)
+            .setPopup(
+            new mapboxgl.Popup({ offset: 25 }) // add popups
+            .setHTML(
+  '<table class = marker-info><tbody><tr><th>DATE</th><td>'
+  +marker.sightingDate +'</td></tr>'+
+  '<tr><th>SPECIES</th><td>'+marker.speciesCode +'</td></tr>'+
+  '<tr><th>ESTIMATE</th><td>'+marker.estimate +'</td></tr>'+
+  '<tr><th>OBSERVER</th><td>'+marker.name +'</td></tr>'+
+  '</tbody></table>'
+  
+          
+            )
+            )
+            .addTo(map);
+            });
+        }else{
+          console.log("error")
+        }
+      }
+    
+
+      
+    }

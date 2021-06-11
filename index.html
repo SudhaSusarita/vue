@@ -65,7 +65,53 @@
             </button>
           </div>
     </div>  -->
-<div id="map"></div>
+<div id="map">
+  
+</div>
+<div class="map-overlay top">
+  <div class="map-overlay-inner">
+  <fieldset>
+  <label>Select Species</label>
+  <select id="layer" name="species">
+  <option value="GRS">Grey Seal</option>
+  <option value="SBCD">Common dolphin</option>
+  </select>
+  </fieldset>
+  <fieldset>
+  <label>Date Range</label>
+  <select id="layer" name="range">
+    <option value="year">Last 12 Months</option>
+    <option value="six">Last 6 Months</option>
+    <option value="three">Last 3 Months</option>
+    <option value="lastmonth">Last Month</option>
+    <option value="lastweek">Last Week</option>
+
+    </select>
+  </fieldset>
+  <fieldset>
+    <label>Month</label>
+    <select id="layer" name="month">
+      <option value="January">January</option>
+      <option value="Feburary">Feburary</option>
+      <option value="March">March</option>
+      <option value="April">April</option>
+      <option value="May">May</option>
+      <option value="June">June</option>
+      <option value="July">July</option>
+      <option value="August">August</option>
+
+      <option value="September">September</option>
+      <option value="October">October</option>
+      <option value="November">November</option>
+      <option value="December">December</option>
+
+      </select>
+    </fieldset>
+    <fieldset>
+    <button onclick="filter()">Filter</button>
+  </fieldset>
+  </div>
+  </div>
 <script src="app.js"></script>
 
 </body>
